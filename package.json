@@ -1,0 +1,13 @@
+{
+  "name": "playwright_lambda",
+  "version": "1.0.0",
+  "description": "test creation",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.29.2"
+  }
+}
