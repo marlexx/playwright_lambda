@@ -38,7 +38,7 @@ const playwrightClientVersion = cp.execSync('npx playwright --version').toString
     let targetAmount = "95";
     let ele = await page.locator('xpath = //*[@id="rangeSuccess"]');
     let srcBound = await s.boundingBox();
-    let X = 0.92;
+    let X = 0.91;
 
     if (s) {
         while (!isComplete) {
@@ -60,7 +60,6 @@ const playwrightClientVersion = cp.execSync('npx playwright --version').toString
 
   try {
     expect(text).toMatch(targetAmount);
-    // Mark the test as completed or failed
     await page.evaluate(_ => {}, `lambdatest_action: ${JSON.stringify({ action: 'setTestStatus', arguments: { status: 'passed', remark: 'The correct text is displayed' } })}`)
   } catch {
     await page.evaluate(_ => {}, `lambdatest_action: ${JSON.stringify({ action: 'setTestStatus', arguments: { status: 'failed', remark: 'The correct text is not displayed' } })}`)

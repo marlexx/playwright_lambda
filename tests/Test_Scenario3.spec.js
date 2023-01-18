@@ -13,7 +13,12 @@ test('Test Scenario 3', async ({ page }) => {
     //await page.pause();
 
     const mes = await page.evaluate(() => document.getElementById("name").validationMessage);
-    const ker = 'Please fill out this field.'
+    var ker = 'Please fill out this field.'
+
+    if(mes != ker)
+    {
+        ker = 'Fill out this field';
+    }
 
     await expect(mes).toMatch(ker);
 

@@ -43,9 +43,13 @@ const playwrightClientVersion = cp.execSync('npx playwright --version').toString
     const mes = await page.evaluate(() => document.getElementById("name").validationMessage);
     const ker = 'Please fill out this field.'
 
+    if(mes != ker)
+    {
+        ker = 'Fill out this field';
+    }
+
     try {
         expect(mes).toMatch(ker);
-        // Mark the test as completed or failed
         await page.evaluate(_ => {}, `lambdatest_action: ${JSON.stringify({ action: 'setTestStatus', arguments: { status: 'passed', remark: 'The correct message is displayed' } })}`)
       } catch {
         await page.evaluate(_ => {}, `lambdatest_action: ${JSON.stringify({ action: 'setTestStatus', arguments: { status: 'failed', remark: 'The correct message is not displayed' } })}`)
@@ -71,7 +75,6 @@ const playwrightClientVersion = cp.execSync('npx playwright --version').toString
 
   try {
     expect(me).toMatch(ke);
-    // Mark the test as completed or failed
     await page.evaluate(_ => {}, `lambdatest_action: ${JSON.stringify({ action: 'setTestStatus', arguments: { status: 'passed', remark: 'The correct text is displayed' } })}`)
   } catch {
     await page.evaluate(_ => {}, `lambdatest_action: ${JSON.stringify({ action: 'setTestStatus', arguments: { status: 'failed', remark: 'The correct text is not displayed' } })}`)

@@ -10,7 +10,7 @@ test('Test Scenario 2', async ({ page }) => {
     let targetAmount = "95";
     let ele = await page.locator('xpath = //*[@id="rangeSuccess"]');
     let srcBound = await s.boundingBox();
-    let X = 0.92;
+    let X = 0.91;
 
     if (s) {
         while (!isComplete) {

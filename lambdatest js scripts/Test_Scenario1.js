@@ -46,7 +46,6 @@ const playwrightClientVersion = cp.execSync('npx playwright --version').toString
 
   try {
     expect(ker).toMatch(mes);
-    // Mark the test as completed or failed
     await page.evaluate(_ => {}, `lambdatest_action: ${JSON.stringify({ action: 'setTestStatus', arguments: { status: 'passed', remark: 'The correct text is displayed' } })}`)
   } catch {
     await page.evaluate(_ => {}, `lambdatest_action: ${JSON.stringify({ action: 'setTestStatus', arguments: { status: 'failed', remark: 'The correct text is not displayed' } })}`)
