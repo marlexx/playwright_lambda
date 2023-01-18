@@ -1,6 +1,6 @@
 tasks:
 - init: >
-        npm install npm@latest -g &&
+        npm install &&
         gp sync-done bundle &&
         npx playwright install &&
         npx playwright install-deps     
