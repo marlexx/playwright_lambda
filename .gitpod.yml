@@ -1,4 +1,4 @@
 tasks:
   - init: npx playwright install
-  - init: npm install npm@latest -g 
-  - init: npx playwright install-deps  
+     npm install npm@latest -g
+     npx playwright install-deps
