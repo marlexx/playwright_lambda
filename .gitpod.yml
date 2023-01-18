@@ -1,12 +1,14 @@
 tasks:
-- init: |
+- init: >
       npm install npm@latest -g
       gp sync-done bundle
 
-- init: npx playwright install
+- init: >
+        npx playwright install
         gp sync-await bundle
         gp sync-done bundles
 
-- init: npx playwright install-deps
+- init: >
+        npx playwright install-deps
         gp sync-await bundles
       
