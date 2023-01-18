@@ -1,31 +1,11 @@
 const { chromium } = require('playwright')
-const { expect } = require('@playwright/test');
-const cp = require('child_process');
-const playwrightClientVersion = cp.execSync('npx playwright --version').toString().trim().split(' ')[1];
+const { expect } = require('@playwright/test')
 
-(async () => {
-  const capabilities = {
-    'browserName': 'Chrome', // Browsers allowed: `Chrome`, `MicrosoftEdge`, `pw-chromium`, `pw-firefox` and `pw-webkit`
-    "browserVersion": "108.0",
-    'LT:Options': {
-      'platform': 'Windows 10',
-      'build': 'Test Scenario 1 build',
-      'name': 'Test Scenario 1',
-      'user': 'x2junior02',
-      'accessKey': 'mPCnuJKhSuCqINv39qwWutb749yv2Bg3nFEg8EUponsJTJwxVv',
-      'network': true,
-      'visual': true,
-      'video': true,
-      'console': true,
-      'tunnel': false, // Add tunnel configuration if testing locally hosted webpage
-      'tunnelName': '', // Optional
-      'geoLocation': '', // country code can be fetched from https://www.lambdatest.com/capabilities-generator/
-      'playwrightClientVersion': playwrightClientVersion
-    }
-  }
+const parallelTests = async (capability) => {
+  console.log('Initialising test:: ', capability['LT:Options']['name'])
 
   const browser = await chromium.connect({
-    wsEndpoint: `wss://cdp.lambdatest.com/playwright?capabilities=${encodeURIComponent(JSON.stringify(capabilities))}`
+    wsEndpoint: `wss://cdp.lambdatest.com/playwright?capabilities=${encodeURIComponent(JSON.stringify(capability))}`
   })
 
   const page = await browser.newPage()
@@ -52,4 +32,56 @@ const playwrightClientVersion = cp.execSync('npx playwright --version').toString
   }
 
   await browser.close()
-})()
+}
+
+// Capabilities array for with the respective configuration for the parallel tests
+const capabilities = [
+  {
+    'browserName': 'pw-firefox', // Browsers allowed: `Chrome`, `MicrosoftEdge`, `pw-chromium`, `pw-firefox` and `pw-webkit`
+    'browserVersion': 'latest',
+    'LT:Options': {
+      'platform': 'Windows 10',
+      'build': 'Test Scenario 1',
+      'name': 'TS1 on  windows 10 firefox',
+      'user': 'x2junior02',
+      'accessKey': 'mPCnuJKhSuCqINv39qwWutb749yv2Bg3nFEg8EUponsJTJwxVv',
+      'network': true,
+      'video': true,
+      'console': true,
+      'visual': true
+    }
+  },
+  {
+    'browserName': 'MicrosoftEdge',
+    'browserVersion': 'latest',
+    'LT:Options': {
+      'platform': 'Windows 8',
+      'build': 'Test Scenario 1',
+      'name': 'TS1 on Windows 8 Edge',
+      'user': 'x2junior02',
+      'accessKey': 'mPCnuJKhSuCqINv39qwWutb749yv2Bg3nFEg8EUponsJTJwxVv',
+      'network': true,
+      'video': true,
+      'console': true,
+      'visual': true
+    }
+  },
+  {
+    'browserName': 'Chrome',
+    'browserVersion': '108.0',
+    'LT:Options': {
+      'platform': 'Windows 10',
+      'build': 'Test Scenario 1',
+      'name': 'TS1 on windows 10 Chrome',
+      'user': 'x2junior02',
+      'accessKey': 'mPCnuJKhSuCqINv39qwWutb749yv2Bg3nFEg8EUponsJTJwxVv',
+      'network': true,
+      'video': true,
+      'console': true,
+      'visual': true
+    }
+  }]
+
+capabilities.forEach(async (capability) => {
+  await parallelTests(capability)
+})
