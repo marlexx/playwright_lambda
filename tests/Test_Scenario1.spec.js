@@ -3,8 +3,6 @@ const { test, expect } = require('@playwright/test');
 test('Test Scenario 1', async ({ page }) => {
   await page.goto('https://www.lambdatest.com/selenium-playground');
 
-  //await page.pause();
-
   await page.getByRole('link', { name: 'Simple Form Demo' }).click();
 
   await expect(page.url()).toContain('simple-form-demo');

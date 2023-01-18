@@ -3,7 +3,6 @@ const { test, expect } = require('@playwright/test');
 test('Test Scenario 2', async ({ page }) => {
 
     await page.goto('https://www.lambdatest.com/selenium-playground');
-    await page.pause();
     await page.getByRole('link', { name: 'Drag & Drop Sliders' }).click();
 
     const s = await page.locator('xpath = //*[@id="slider3"]/div/input');
