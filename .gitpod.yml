@@ -1,3 +1,6 @@
 tasks:
-  - init: npm install
-    command: node playwright-single.js
+- init: >
+        npm install &&
+        gp sync-done bundle &&
+        npx playwright install &&
+        npx playwright install-deps     
